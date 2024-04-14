@@ -1,34 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 style="text-align: center;">Works log</h1>
-{% for item in jobs %}
-<div>
-    <h2>Action {{ item.id }}</h2>
-    <table>
-    <thead>
-        <tr>
-            <th style="background: grey;">Title of activity</th>
-            <th style="background: grey;">Team leader</th>
-            <th style="background: grey;">Duration</th>
-            <th style="background: grey;">List of collaborators</th>
-            <th style="background: grey;">Is finished</th>
-        </tr>
-    </thead>
-    <tbody>
-            <tr>
-                <td style="background: blue;">{{ item.job }}</td>
-                <td style="background: blue;">{{ item.user.name }} {{ item.user.surname }}</td>
-                <td style="background: blue;">{{ item.duration }}</td>
-                <td style="background: blue;">{{ item.collaborators }}</td>
-                {% if item.is_finished == 1 %}
-                    <td style="background: pink;" >Is finished</td>
-                {% else %}
-                    <td style="background: pink;">Is not finished</td>
-                {% endif %}
-            </tr>
-    </tbody>
-</table>
-</div>
-{% endfor %}
+<h1>Register Form</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.login.label }}<br>
+        {{ form.login(type="email") }}
+        {% for error in form.login.errors %}
+            <p style="color: red">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(type="password") }}
+        {% for error in form.password.errors %}
+        <p>
+            {{ error }}
+        </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.re_password.label }}<br>
+        {{ form.re_password(type="password") }}
+    </p>
+    <p>
+        {{ form.surname.label }}<br>
+        {{ form.surname() }}
+    </p>
+    <p>
+        {{ form.name.label }}<br>
+        {{ form.name() }}
+    </p>
+    <p>
+        {{ form.age.label }}<br>
+        {{ form.age() }}
+    </p>
+    <p>
+        {{ form.position.label }}<br>
+        {{ form.position() }}
+    </p>
+    <p>
+        {{ form.speciality.label }}<br>
+        {{ form.speciality() }}
+    </p>
+    <p>
+        {{ form.address.label }}<br>
+        {{ form.address() }}
+    </p>
+    <p>
+        {{ form.submit(type="submit") }}
+    </p>
+    {{ message }}
+</form>
 {% endblock %}
